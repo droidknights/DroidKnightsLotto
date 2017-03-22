@@ -14,6 +14,11 @@
         android:scaleType="centerInside"
         android:src="@drawable/logo" />
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +45,4 @@
             app:srcCompat="@drawable/btn_next" />
     </RelativeLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
 </android.support.design.widget.CoordinatorLayout>

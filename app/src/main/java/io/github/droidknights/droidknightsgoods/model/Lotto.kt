@@ -12,7 +12,7 @@ fun List<Lotto>.shuffleTakeList(size: Int): List<Lotto> {
     with(this) {
         val sliced = filter { (_, result) -> result == null }
                 .toList()
-        Collections.shuffle(sliced, Random(System.currentTimeMillis()))
+        Collections.shuffle(sliced, Random(System.nanoTime()))
         return sliced.take(size)
     }
 }

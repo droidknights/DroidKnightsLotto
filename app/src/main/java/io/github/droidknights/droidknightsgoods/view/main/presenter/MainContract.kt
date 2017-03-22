@@ -1,7 +1,7 @@
 package io.github.droidknights.droidknightsgoods.view.main.presenter
 
-import io.github.droidknights.droidknightsgoods.model.Lotto
 import io.github.droidknights.droidknightsgoods.model.Premium
+import io.github.droidknights.droidknightsgoods.view.main.adapter.model.ResultAdapterContract
 import tech.thdev.base.presenter.BasePresenter
 import tech.thdev.base.presenter.BaseView
 
@@ -13,19 +13,21 @@ interface MainContract {
 
     interface View : BaseView {
 
-        fun showItem(premium: Premium)
+        fun showItem(position: Int, premium: Premium)
 
-        fun showNumber(number: String)
+        fun showResultView()
 
         fun hideItem()
     }
 
     interface Presenter : BasePresenter<View> {
 
-        var lotto: Lotto
+        var resultAdapterModel: ResultAdapterContract.Model
+        var resultAdapterView: ResultAdapterContract.View
 
-        fun updateProduct(position: Int)
+        fun updateNextItem()
+        fun updatePrevItem()
 
-        fun startLotto(productNumber: Int)
+        fun startLotto(position: Int)
     }
 }
