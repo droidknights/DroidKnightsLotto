@@ -15,27 +15,20 @@ class LottoKtTest {
     @Test
     fun shuffleTakeList() {
         val premiums = arrayOf(
-                Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
-                Premium("후원 - 한빛미디어", "안드로이드 서적", 10, "권", R.drawable.books),
-                Premium("제공 - 권태환", "udemy - 코틀린 강의", 5, "장", R.drawable.kotlin_logo),
-                Premium("제공 - 박민우", "블루투스 키보드 + 마우스", 1, "개", R.drawable.keyboard_mouse),
-                Premium("제공 - 가나초코", "안드로이드 피규어", 10, "개", R.drawable.android_figurine),
-                Premium("", "타조쿠션", 3, "개", R.drawable.ostrich_cushion),
-                Premium("", "레오폴드 FC750R", 1, "개", R.drawable.fc750r),
-                Premium("", "레오폴드 FC980C", 1, "개", R.drawable.fc980c),
-                Premium("", "G Watch Style", 1, "개", R.drawable.lg_watch))
-        val resultName = arrayOf("안드로이드 서적", "안드로이드 서적", "udemy - 코틀린 강의", null)
-        val resultCount = intArrayOf(6, 10, 5, 0)
+                Premium("","경품A", 2, "", 0),
+                Premium("", "경품B", 1, "", 0),
+                Premium("", "경품C", 10, "", 0),
+                Premium("", "경품D", 5, "", 0))
+        val resultName = arrayOf("경품A", "경품B", "경품C", null)
+        val resultCount = intArrayOf(2, 1, 8, 0)
 
         for ((idx, premium) in premiums.withIndex()) {
             val takeList = list.shuffleTakeList(premium.count)
             takeList.forEach { it ->
                 it.result = premium.name
-                println(idx)
             }
             assertEquals(takeList.getOrNull(0)?.result, resultName[idx])
             assertEquals(takeList.size, resultCount[idx])
         }
     }
-
 }
