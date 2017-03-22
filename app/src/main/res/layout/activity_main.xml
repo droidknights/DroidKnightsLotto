@@ -4,30 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.droidknights.droidknightsgoods.MainActivity">
+    android:background="@color/colorPrimary"
+    tools:context="io.github.droidknights.droidknightsgoods.view.main.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/logo" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="top|right"
+        app:layout_anchor="@id/img_logo"
+        android:layout_margin="5dp"
+        app:layout_anchorGravity="bottom|left">
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/btn_prev" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_toRightOf="@id/fab_prev"
+            app:srcCompat="@drawable/btn_next" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
 </android.support.design.widget.CoordinatorLayout>
