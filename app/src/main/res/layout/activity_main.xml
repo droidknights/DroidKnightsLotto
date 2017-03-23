@@ -15,7 +15,7 @@
         android:src="@drawable/logo" />
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/contet_main_include"
         layout="@layout/content_main"
         android:visibility="gone"/>
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         app:layout_anchor="@id/img_logo"
-        android:layout_margin="5dp"
+        android:layout_margin="20dp"
         app:layout_anchorGravity="bottom|left">
 
         <android.support.design.widget.FloatingActionButton

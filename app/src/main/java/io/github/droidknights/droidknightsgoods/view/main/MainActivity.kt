@@ -43,12 +43,12 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
     }
 
     override fun hideItem() {
-        include.visibility = View.GONE
+        contet_main_include.visibility = View.GONE
         rl_result_view_container.visibility = View.GONE
     }
 
     override fun showItem(position: Int, premium: Premium) {
-        include.visibility = View.VISIBLE
+        contet_main_include.visibility = View.VISIBLE
         rl_result_view_container.visibility = View.GONE
         tv_sponsors.text = ""
         if (premium.sponsors.isNotEmpty()) {
