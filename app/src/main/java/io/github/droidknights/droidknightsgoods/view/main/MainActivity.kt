@@ -1,7 +1,7 @@
 package io.github.droidknights.droidknightsgoods.view.main
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import io.github.droidknights.droidknightsgoods.R
 import io.github.droidknights.droidknightsgoods.model.Premium
@@ -28,7 +28,7 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 
         val resultAdapter = ResultAdapter(this)
-        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.layoutManager = GridLayoutManager(this, 3)
         recycler_view.adapter = resultAdapter
 
         presenter?.resultAdapterModel = resultAdapter
@@ -44,12 +44,15 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
 
     override fun hideItem() {
         include.visibility = View.GONE
-        rl_result_view_container.visibility = View.GONE
+        recycler_view.visibility = View.GONE
+        bgLayer.visibility = View.GONE
     }
 
     override fun showItem(position: Int, premium: Premium) {
         include.visibility = View.VISIBLE
-        rl_result_view_container.visibility = View.GONE
+        recycler_view.visibility = View.GONE
+        bgLayer.visibility = View.GONE
+
         tv_sponsors.text = ""
         if (premium.sponsors.isNotEmpty()) {
             tv_sponsors.text = premium.sponsors
@@ -64,6 +67,7 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
     }
 
     override fun showResultView() {
-        rl_result_view_container.visibility = View.VISIBLE
+        recycler_view.visibility = View.VISIBLE
+        bgLayer.visibility = View.VISIBLE
     }
 }
