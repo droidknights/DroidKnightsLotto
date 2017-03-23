@@ -43,13 +43,13 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
     }
 
     override fun hideItem() {
-        include.visibility = View.GONE
+        contet_main_include.visibility = View.GONE
         recycler_view.visibility = View.GONE
         bgLayer.visibility = View.GONE
     }
 
     override fun showItem(position: Int, premium: Premium) {
-        include.visibility = View.VISIBLE
+        contet_main_include.visibility = View.VISIBLE
         recycler_view.visibility = View.GONE
         bgLayer.visibility = View.GONE
 
