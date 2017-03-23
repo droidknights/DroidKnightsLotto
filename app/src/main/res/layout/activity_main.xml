@@ -15,7 +15,7 @@
         android:src="@drawable/logo" />
 
     <include
-        android:id="@+id/contet_main_include"
+        android:id="@+id/content_main_include"
         layout="@layout/content_main"
         android:visibility="gone"/>
 
@@ -44,5 +44,10 @@
             android:layout_toRightOf="@id/fab_prev"
             app:srcCompat="@drawable/btn_next" />
     </RelativeLayout>
+
+    <include
+        android:id="@+id/content_result_include"
+        layout="@layout/content_result"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>

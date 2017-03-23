@@ -9,4 +9,7 @@ data class Premium(val sponsors: String,
                    val count : Int,
                    val unit: String,
                    val res: Int,
-                   var showAtOne: Int = 0)
+                   var showAtOne: Int = 0) {
+
+    fun getTotal() = count - showAtOne
+}

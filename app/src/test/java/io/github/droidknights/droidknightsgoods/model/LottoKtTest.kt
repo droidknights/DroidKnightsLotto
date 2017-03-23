@@ -1,6 +1,5 @@
 package io.github.droidknights.droidknightsgoods.model
 
-import io.github.droidknights.droidknightsgoods.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -19,15 +18,15 @@ class LottoKtTest {
                 Premium("", "경품B", 1, "", 0),
                 Premium("", "경품C", 10, "", 0),
                 Premium("", "경품D", 5, "", 0))
-        val resultName = arrayOf("경품A", "경품B", "경품C", null)
+        val resultName = arrayOf(0, 1, 2, null)
         val resultCount = intArrayOf(2, 1, 8, 0)
 
         for ((idx, premium) in premiums.withIndex()) {
             val takeList = list.shuffleTakeList(premium.count)
             takeList.forEach { it ->
-                it.result = premium.name
+                it.premiumIdx = idx
             }
-            assertEquals(takeList.getOrNull(0)?.result, resultName[idx])
+            assertEquals(takeList.getOrNull(0)?.premiumIdx, resultName[idx])
             assertEquals(takeList.size, resultCount[idx])
         }
     }

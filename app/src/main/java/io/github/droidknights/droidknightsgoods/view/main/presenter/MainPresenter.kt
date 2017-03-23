@@ -1,5 +1,6 @@
 package io.github.droidknights.droidknightsgoods.view.main.presenter
 
+import android.util.Log
 import io.github.droidknights.droidknightsgoods.R
 import io.github.droidknights.droidknightsgoods.model.Lotto
 import io.github.droidknights.droidknightsgoods.model.Premium
@@ -33,6 +34,17 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
     override var resultAdapterView: ResultAdapterContract.View
         set(value) {
             _resultAdapterView = value
+            _resultAdapterView.setOnClickListener { premiumIdx, isHide ->
+                val premium = premiums[premiumIdx]
+                if (isHide) {
+                    premium.showAtOne++
+                } else {
+                    premium.showAtOne--
+                    if (premium.showAtOne < 0) premium.showAtOne = 0
+                }
+
+                Log.d("TEMP", "isHide $isHide showAtOne ${premiums[premiumIdx].showAtOne}")
+            }
         }
         get() = _resultAdapterView
 
@@ -50,27 +62,35 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
         if (nowPosition < -1) {
             nowPosition = -1
         } else if (nowPosition >= premiums.size) {
-            nowPosition = premiums.size - 1
+            nowPosition = -1
         }
 
         if (nowPosition == -1) {
             view?.hideItem()
         } else {
-            view?.showItem(nowPosition, premiums[nowPosition])
+            val premium = premiums[nowPosition]
+            view?.showItem(nowPosition, premium.sponsors, premium.getTotal(), premium.unit, premium.name, premium.res)
         }
     }
 
     override fun startLotto(position: Int) {
         val premium = premiums[position]
-        val takeList = list.shuffleTakeList(premium.count - premium.showAtOne)
+        val takeList = list.shuffleTakeList(premium.getTotal())
 
         resultAdapterModel.clear()
         takeList.forEach { lotto ->
-            lotto.result = premium.name
+            lotto.premiumIdx = position
+            if (premium.count == 1) {
+                lotto.isInterval = true
+            }
             resultAdapterModel.addItem(lotto)
         }
 
-        view?.showResultView()
+        view?.showResultView(premium.getTotal())
         resultAdapterView.notifyDataChange()
+    }
+
+    override fun updateRemainingCount() {
+        updateNowItem()
     }
 }

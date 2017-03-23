@@ -9,6 +9,9 @@ import io.github.droidknights.droidknightsgoods.model.Lotto
 interface ResultAdapterContract {
 
     interface View {
+
+        fun setOnClickListener(onClick: (Int, Boolean) -> Unit)
+
         fun notifyDataChange()
     }
 

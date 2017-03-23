@@ -2,16 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="20dp">
 
-    <TextView
+    <CheckedTextView
         android:id="@+id/tv_result_idx"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:gravity="center"
+        android:layout_centerInParent="true"
         android:text="005"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/color_select_item"
         android:textSize="60sp"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package io.github.droidknights.droidknightsgoods.view.main.presenter
 
-import io.github.droidknights.droidknightsgoods.model.Premium
 import io.github.droidknights.droidknightsgoods.view.main.adapter.model.ResultAdapterContract
 import tech.thdev.base.presenter.BasePresenter
 import tech.thdev.base.presenter.BaseView
@@ -13,9 +12,9 @@ interface MainContract {
 
     interface View : BaseView {
 
-        fun showItem(position: Int, premium: Premium)
+        fun showItem(position: Int, sponsors: String, count: Int, unit: String, productName: String, imageRes: Int)
 
-        fun showResultView()
+        fun showResultView(count: Int)
 
         fun hideItem()
     }
@@ -29,5 +28,7 @@ interface MainContract {
         fun updatePrevItem()
 
         fun startLotto(position: Int)
+
+        fun updateRemainingCount()
     }
 }
