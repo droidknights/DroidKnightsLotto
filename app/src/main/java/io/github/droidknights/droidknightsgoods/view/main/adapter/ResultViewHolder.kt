@@ -36,7 +36,7 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onClickList
             }
             tv_result_idx.isChecked = false
             tv_result_idx.setOnClickListener {
-                tv_result_idx.isChecked = !tv_result_idx.isChecked
+                Log.d("TEMP", "click ${lotto.premiumIdx}")
                 onClickListener.onClickItem(lotto.premiumIdx, tv_result_idx.isChecked)
             }
         }
