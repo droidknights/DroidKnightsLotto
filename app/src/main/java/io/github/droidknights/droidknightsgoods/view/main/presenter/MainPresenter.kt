@@ -18,14 +18,14 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
     val list = (1..200).map { Lotto(it) }
 
     var premiums = arrayOf(
-//            Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
-//            Premium("후원 - 한빛미디어", "안드로이드 서적", 10, "권", R.drawable.books),
-//            Premium("제공 - 권태환", "udemy - 코틀린 강의", 5, "장", R.drawable.kotlin_logo),
-//            Premium("제공 - 박민우", "블루투스 키보드 + 마우스", 1, "개", R.drawable.keyboard_mouse),
-//            Premium("제공 - 가나초코", "안드로이드 피규어", 10, "개", R.drawable.android_figurine),
-//            Premium("", "타조쿠션", 3, "개", R.drawable.ostrich_cushion),
-//            Premium("", "레오폴드 FC750R", 1, "개", R.drawable.fc750r),
-//            Premium("", "레오폴드 FC980C", 1, "개", R.drawable.fc980c),
+            Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
+            Premium("후원 - 한빛미디어", "안드로이드 서적", 10, "권", R.drawable.books),
+            Premium("제공 - 권태환", "udemy - 코틀린 강의", 5, "장", R.drawable.kotlin_logo),
+            Premium("제공 - 박민우", "블루투스 키보드 + 마우스", 1, "개", R.drawable.keyboard_mouse),
+            Premium("제공 - 가나초코", "안드로이드 피규어", 10, "개", R.drawable.android_figurine),
+            Premium("", "타조쿠션", 3, "개", R.drawable.ostrich_cushion),
+            Premium("", "레오폴드 FC750R", 1, "개", R.drawable.fc750r),
+            Premium("", "레오폴드 FC980C", 1, "개", R.drawable.fc980c),
             Premium("", "G Watch Style", 1, "개", R.drawable.lg_watch))
 
     lateinit override var resultAdapterModel: ResultAdapterContract.Model
@@ -66,7 +66,7 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
         resultAdapterModel.clear()
         takeList.forEach { lotto ->
             lotto.premiumIdx = position
-            if (premium.count == 1) {
+            if (premium.isAnimator()) {
                 lotto.isAnimationNumber = true
             }
             resultAdapterModel.addItem(lotto)

@@ -12,4 +12,6 @@ data class Premium(val sponsors: String,
                    var showAtOne: Int = 0) {
 
     fun getTotal() = count - showAtOne
+
+    fun isAnimator() = getTotal() == 1
 }
