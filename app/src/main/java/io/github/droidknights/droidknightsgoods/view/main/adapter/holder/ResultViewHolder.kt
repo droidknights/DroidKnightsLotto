@@ -24,12 +24,13 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClic
     fun onBindView(position: Int, lotto: Lotto) {
         animValue = 0
         itemView?.apply {
-            if (lotto.isInterval) {
+            if (lotto.isAnimationNumber) {
                 tv_result_idx.text = 0.toString()
                 var interval = lotto.idx / 10
                 if (interval <= 0) {
                     interval = 1
                 }
+                duration = 20L
                 startAnimation(lotto.idx, interval)
             } else {
                 tv_result_idx.text = lotto.idx.toString()
@@ -60,8 +61,8 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClic
                         tv_result_idx.text = animValue.toString()
                         tv_result_idx.translationY = 0F
                         if (animValue + interval != destValue) {
-                            duration -= 20L
-                            if (duration <= 0) { duration = 10L }
+                            duration += 20L
+                            if (duration >= 250) { duration = 250L }
                             startAnimation(destValue, interval)
                         } else {
                             tv_result_idx.text = destValue.toString()

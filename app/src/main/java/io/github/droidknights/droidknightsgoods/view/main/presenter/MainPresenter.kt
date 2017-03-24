@@ -67,7 +67,7 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
         takeList.forEach { lotto ->
             lotto.premiumIdx = position
             if (premium.count == 1) {
-                lotto.isInterval = true
+                lotto.isAnimationNumber = true
             }
             resultAdapterModel.addItem(lotto)
         }

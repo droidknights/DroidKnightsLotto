@@ -6,7 +6,7 @@ import java.util.*
  * Lotto Data Class
  * Created by pluu on 2017-03-20.
  */
-data class Lotto(val idx: Int, var premiumIdx: Int = -1, var isInterval: Boolean = false)
+data class Lotto(val idx: Int, var premiumIdx: Int = -1, var isAnimationNumber: Boolean = false)
 
 fun List<Lotto>.shuffleTakeList(size: Int): List<Lotto> {
     with(this) {
