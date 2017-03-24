@@ -46,7 +46,7 @@ class PremiumFragment : BasePresenterFragment<PremiumContract.View, PremiumContr
 
     override fun showItem(sponsors: String, count: Int, unit: String, productName: String, imageRes: Int) {
         android.util.Log.w("TEMP", "showItem $position")
-        rl_done_view.visibility = View.GONE
+        img_done_button.visibility = View.GONE
 
         tv_sponsors.text = ""
         if (sponsors.isNotEmpty()) {
@@ -62,7 +62,7 @@ class PremiumFragment : BasePresenterFragment<PremiumContract.View, PremiumContr
                 .into(img_gifts)
 
         if (count == 0) {
-            rl_done_view.visibility = View.VISIBLE
+            img_done_button.visibility = View.VISIBLE
             img_gifts.setOnClickListener { }
         } else {
             img_gifts.setOnClickListener {
