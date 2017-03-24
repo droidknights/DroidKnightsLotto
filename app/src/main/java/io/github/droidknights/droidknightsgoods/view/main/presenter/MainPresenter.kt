@@ -2,6 +2,7 @@ package io.github.droidknights.droidknightsgoods.view.main.presenter
 
 import android.util.Log
 import io.github.droidknights.droidknightsgoods.R
+import io.github.droidknights.droidknightsgoods.model.ConstLimit
 import io.github.droidknights.droidknightsgoods.model.Lotto
 import io.github.droidknights.droidknightsgoods.model.Premium
 import io.github.droidknights.droidknightsgoods.model.shuffleTakeList
@@ -15,7 +16,7 @@ import tech.thdev.base.presenter.AbstractPresenter
 
 class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Presenter {
 
-    val list = (1..200).map { Lotto(it) }
+    val list = (1..ConstLimit()).map { Lotto(it) }
 
     var premiums = arrayOf(
             Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
