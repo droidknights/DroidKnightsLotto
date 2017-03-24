@@ -12,7 +12,6 @@ import io.github.droidknights.droidknightsgoods.view.main.presenter.MainContract
 import io.github.droidknights.droidknightsgoods.view.main.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_result.*
-import kotlinx.android.synthetic.main.fragment_premium.*
 import tech.thdev.base.view.BasePresenterActivity
 
 class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
@@ -62,13 +61,14 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
 
     override fun hideItem() {
         img_logo.alpha = 1f
-        constraint_layout_main.visibility = View.GONE
+        view_pager.visibility = View.GONE
+        img_logo_text.visibility = View.GONE
+        tv_message.visibility = View.GONE
         content_result_include.visibility = View.GONE
     }
 
     override fun showResultView(count: Int) {
         content_result_include.visibility = View.VISIBLE
-        rl_done_view.visibility = View.GONE
 
         var spanCount = 3
         when (count) {
@@ -85,18 +85,20 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
             tv_message.setOnClickListener {
                 presenter?.changeItems()
             }
-            img_logo.setOnClickListener {  }
+            img_logo.setOnClickListener { }
 
         } else {
             img_logo.alpha = 0.5f
-            constraint_layout_main.visibility = View.VISIBLE
+            view_pager.visibility = View.VISIBLE
+            img_logo_text.visibility = View.VISIBLE
         }
     }
 
     override fun showLastItem(position: Int) {
         img_logo.alpha = 0.5f
         tv_message.visibility = View.GONE
-        constraint_layout_main.visibility = View.VISIBLE
+        view_pager.visibility = View.VISIBLE
+        img_logo_text.visibility = View.VISIBLE
         view_pager.setCurrentItem(position, true)
     }
 }

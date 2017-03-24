@@ -55,22 +55,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_sponsors"
         tools:src="@drawable/droidknights_text" />
 
-    <RelativeLayout
-        android:id="@+id/rl_done_view"
+    <ImageView
+        android:id="@+id/img_done_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#BB000000"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tv_count"
         app:layout_constraintLeft_toLeftOf="@+id/img_gifts"
         app:layout_constraintRight_toRightOf="@+id/img_gifts"
         app:layout_constraintTop_toBottomOf="@+id/tv_sponsors"
-        android:padding="50dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_done" />
-    </RelativeLayout>
+        android:padding="50dp"
+        android:src="@drawable/img_done" />
 
 </android.support.constraint.ConstraintLayout>
