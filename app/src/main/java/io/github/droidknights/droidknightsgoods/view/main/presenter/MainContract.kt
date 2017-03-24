@@ -1,5 +1,6 @@
 package io.github.droidknights.droidknightsgoods.view.main.presenter
 
+import io.github.droidknights.droidknightsgoods.view.main.adapter.model.PremiumPagerModel
 import io.github.droidknights.droidknightsgoods.view.main.adapter.model.ResultAdapterContract
 import tech.thdev.base.presenter.BasePresenter
 import tech.thdev.base.presenter.BaseView
@@ -12,11 +13,12 @@ interface MainContract {
 
     interface View : BaseView {
 
-        fun showItem(position: Int, sponsors: String, count: Int, unit: String, productName: String, imageRes: Int)
-
         fun showResultView(count: Int)
 
         fun hideItem()
+
+        fun showNextItem(isAllDone: Boolean)
+        fun showLastItem(position: Int)
     }
 
     interface Presenter : BasePresenter<View> {
@@ -24,11 +26,13 @@ interface MainContract {
         var resultAdapterModel: ResultAdapterContract.Model
         var resultAdapterView: ResultAdapterContract.View
 
-        fun updateNextItem()
-        fun updatePrevItem()
+        var premiumPagerModel: PremiumPagerModel.Model
+        var premiumPagerView: PremiumPagerModel.View
 
         fun startLotto(position: Int)
+        fun updatePagerAdapter()
+        fun checkLastItem()
 
-        fun updateRemainingCount()
+        fun changeItems()
     }
 }

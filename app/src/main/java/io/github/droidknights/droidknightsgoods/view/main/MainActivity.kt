@@ -2,15 +2,17 @@ package io.github.droidknights.droidknightsgoods.view.main
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.bumptech.glide.Glide
 import io.github.droidknights.droidknightsgoods.R
+import io.github.droidknights.droidknightsgoods.view.anim.ZoomOutPageTransformer
+import io.github.droidknights.droidknightsgoods.view.main.adapter.PremiumPagerAdapter
 import io.github.droidknights.droidknightsgoods.view.main.adapter.ResultAdapter
 import io.github.droidknights.droidknightsgoods.view.main.presenter.MainContract
 import io.github.droidknights.droidknightsgoods.view.main.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_result.*
+import kotlinx.android.synthetic.main.fragment_premium.*
 import tech.thdev.base.view.BasePresenterActivity
 
 class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
@@ -29,58 +31,39 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 
         val resultAdapter = ResultAdapter(this)
-        recycler_view.layoutManager = GridLayoutManager(this, 3)
+        recycler_view.layoutManager = GridLayoutManager(this, 3) as RecyclerView.LayoutManager?
         recycler_view.adapter = resultAdapter
 
         presenter?.resultAdapterModel = resultAdapter
         presenter?.resultAdapterView = resultAdapter
 
-        fab_next.setOnClickListener {
-            presenter?.updateNextItem()
-        }
-        fab_prev.setOnClickListener {
-            presenter?.updatePrevItem()
+        val pagerAdapter = PremiumPagerAdapter(supportFragmentManager)
+        presenter?.premiumPagerModel = pagerAdapter
+        presenter?.premiumPagerView = pagerAdapter
+        presenter?.updatePagerAdapter()
+        view_pager.adapter = pagerAdapter
+        view_pager.setPageTransformer(true, ZoomOutPageTransformer())
+
+        content_result_include.setOnClickListener { }
+
+        img_logo.setOnClickListener {
+            presenter?.checkLastItem()
         }
 
         img_close.setOnClickListener {
-            presenter?.updateRemainingCount()
+            pagerAdapter.notifyDataSetChanged()
+            content_result_include.visibility = View.GONE
         }
 
-        content_result_include.setOnClickListener { }
+        img_logo_text.setOnClickListener {
+            hideItem()
+        }
     }
 
     override fun hideItem() {
-        content_main_include.visibility = View.GONE
+        img_logo.alpha = 1f
+        constraint_layout_main.visibility = View.GONE
         content_result_include.visibility = View.GONE
-        rl_done_view.visibility = View.GONE
-    }
-
-    override fun showItem(position: Int, sponsors: String, count: Int, unit: String, productName: String, imageRes: Int) {
-        content_main_include.visibility = View.VISIBLE
-        content_result_include.visibility = View.GONE
-        rl_done_view.visibility = View.GONE
-
-        tv_sponsors.text = ""
-        if (sponsors.isNotEmpty()) {
-            tv_sponsors.text = sponsors
-        }
-        tv_count.text = "$count$unit"
-        tv_product_name.text = productName
-
-        Glide.with(this)
-                .load(imageRes)
-                .fitCenter()
-                .crossFade()
-                .into(img_gifts)
-
-        if (count == 0) {
-            rl_done_view.visibility = View.VISIBLE
-            img_gifts.setOnClickListener { }
-        } else {
-            img_gifts.setOnClickListener {
-                presenter?.startLotto(position)
-            }
-        }
     }
 
     override fun showResultView(count: Int) {
@@ -93,5 +76,27 @@ class MainActivity : BasePresenterActivity<MainContract.View, MainContract.Prese
             2 -> spanCount = 2
         }
         (recycler_view.layoutManager as GridLayoutManager).spanCount = spanCount
+    }
+
+    override fun showNextItem(isAllDone: Boolean) {
+        if (isAllDone) {
+            img_logo.alpha = 0f
+            tv_message.visibility = View.VISIBLE
+            tv_message.setOnClickListener {
+                presenter?.changeItems()
+            }
+            img_logo.setOnClickListener {  }
+
+        } else {
+            img_logo.alpha = 0.5f
+            constraint_layout_main.visibility = View.VISIBLE
+        }
+    }
+
+    override fun showLastItem(position: Int) {
+        img_logo.alpha = 0.5f
+        tv_message.visibility = View.GONE
+        constraint_layout_main.visibility = View.VISIBLE
+        view_pager.setCurrentItem(position, true)
     }
 }

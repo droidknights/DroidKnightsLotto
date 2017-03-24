@@ -6,7 +6,7 @@ package io.github.droidknights.droidknightsgoods.model
  */
 data class Premium(val sponsors: String,
                    val name: String,
-                   val count : Int,
+                   val count: Int,
                    val unit: String,
                    val res: Int,
                    var showAtOne: Int = 0) {

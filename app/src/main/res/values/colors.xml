@@ -5,6 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorAccentChecked">#44FFFFFF</color>
     <color name="textColor">#49ff06</color>
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
     <color name="color_66000000">#66000000</color>
 </resources>

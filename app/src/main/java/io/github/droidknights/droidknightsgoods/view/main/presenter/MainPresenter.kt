@@ -5,6 +5,7 @@ import io.github.droidknights.droidknightsgoods.R
 import io.github.droidknights.droidknightsgoods.model.Lotto
 import io.github.droidknights.droidknightsgoods.model.Premium
 import io.github.droidknights.droidknightsgoods.model.shuffleTakeList
+import io.github.droidknights.droidknightsgoods.view.main.adapter.model.PremiumPagerModel
 import io.github.droidknights.droidknightsgoods.view.main.adapter.model.ResultAdapterContract
 import tech.thdev.base.presenter.AbstractPresenter
 
@@ -14,19 +15,17 @@ import tech.thdev.base.presenter.AbstractPresenter
 
 class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Presenter {
 
-    private var nowPosition = -1
-
     val list = (1..200).map { Lotto(it) }
 
-    val premiums = arrayOf(
-            Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
-            Premium("후원 - 한빛미디어", "안드로이드 서적", 10, "권", R.drawable.books),
-            Premium("제공 - 권태환", "udemy - 코틀린 강의", 5, "장", R.drawable.kotlin_logo),
-            Premium("제공 - 박민우", "블루투스 키보드 + 마우스", 1, "개", R.drawable.keyboard_mouse),
-            Premium("제공 - 가나초코", "안드로이드 피규어", 10, "개", R.drawable.android_figurine),
-            Premium("", "타조쿠션", 3, "개", R.drawable.ostrich_cushion),
-            Premium("", "레오폴드 FC750R", 1, "개", R.drawable.fc750r),
-            Premium("", "레오폴드 FC980C", 1, "개", R.drawable.fc980c),
+    var premiums = arrayOf(
+//            Premium("후원 - 제이펍", "안드로이드 서적", 6, "권", R.drawable.books),
+//            Premium("후원 - 한빛미디어", "안드로이드 서적", 10, "권", R.drawable.books),
+//            Premium("제공 - 권태환", "udemy - 코틀린 강의", 5, "장", R.drawable.kotlin_logo),
+//            Premium("제공 - 박민우", "블루투스 키보드 + 마우스", 1, "개", R.drawable.keyboard_mouse),
+//            Premium("제공 - 가나초코", "안드로이드 피규어", 10, "개", R.drawable.android_figurine),
+//            Premium("", "타조쿠션", 3, "개", R.drawable.ostrich_cushion),
+//            Premium("", "레오폴드 FC750R", 1, "개", R.drawable.fc750r),
+//            Premium("", "레오폴드 FC980C", 1, "개", R.drawable.fc980c),
             Premium("", "G Watch Style", 1, "개", R.drawable.lg_watch))
 
     lateinit override var resultAdapterModel: ResultAdapterContract.Model
@@ -48,30 +47,17 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
         }
         get() = _resultAdapterView
 
-    override fun updateNextItem() {
-        ++nowPosition
-        updateNowItem()
-    }
-
-    override fun updatePrevItem() {
-        --nowPosition
-        updateNowItem()
-    }
-
-    private fun updateNowItem() {
-        if (nowPosition < -1) {
-            nowPosition = -1
-        } else if (nowPosition >= premiums.size) {
-            nowPosition = -1
+    override lateinit var premiumPagerModel: PremiumPagerModel.Model
+    private lateinit var _premiumPagerView: PremiumPagerModel.View
+    override var premiumPagerView: PremiumPagerModel.View
+        set(value) {
+            _premiumPagerView = value
+            _premiumPagerView.setOnClickListener {
+                startLotto(it)
+            }
         }
+        get() = _premiumPagerView
 
-        if (nowPosition == -1) {
-            view?.hideItem()
-        } else {
-            val premium = premiums[nowPosition]
-            view?.showItem(nowPosition, premium.sponsors, premium.getTotal(), premium.unit, premium.name, premium.res)
-        }
-    }
 
     override fun startLotto(position: Int) {
         val premium = premiums[position]
@@ -90,7 +76,18 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
         resultAdapterView.notifyDataChange()
     }
 
-    override fun updateRemainingCount() {
-        updateNowItem()
+    override fun updatePagerAdapter() {
+        premiumPagerModel.itemList = premiums
+    }
+
+    override fun checkLastItem() {
+        view?.showNextItem(premiums.any { it.count == it.showAtOne })
+    }
+
+    override fun changeItems() {
+        premiums = premiums.plus(Premium("", "후드", 1, "개", R.drawable.img_done))
+        premiumPagerModel.itemList = premiums
+        premiumPagerView.notifyDataSetChanged()
+        view?.showLastItem(premiums.size)
     }
 }

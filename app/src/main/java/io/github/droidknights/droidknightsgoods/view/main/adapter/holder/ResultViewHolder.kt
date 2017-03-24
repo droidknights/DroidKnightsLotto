@@ -1,4 +1,4 @@
-package io.github.droidknights.droidknightsgoods.view.main.adapter
+package io.github.droidknights.droidknightsgoods.view.main.adapter.holder
 
 import android.animation.Animator
 import android.content.Context
@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.droidknights.droidknightsgoods.R
-import io.github.droidknights.droidknightsgoods.listener.OnClickListener
+import io.github.droidknights.droidknightsgoods.listener.OnLottoClickListener
 import io.github.droidknights.droidknightsgoods.model.Lotto
 import kotlinx.android.synthetic.main.item_result_view_holder.view.*
 
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_result_view_holder.view.*
  * Created by tae-hwan on 23/03/2017.
  */
 
-class ResultViewHolder(val context: Context, parent: ViewGroup?, val onClickListener: OnClickListener) :
+class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClickListener: OnLottoClickListener) :
         RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_result_view_holder, parent, false)) {
 
     var animValue = 0
@@ -37,7 +37,7 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onClickList
             tv_result_idx.isChecked = false
             tv_result_idx.setOnClickListener {
                 tv_result_idx.isChecked = !tv_result_idx.isChecked
-                onClickListener.onClickItem(lotto.premiumIdx, tv_result_idx.isChecked)
+                onLottoClickListener.onClickItem(lotto.premiumIdx, tv_result_idx.isChecked)
             }
         }
     }

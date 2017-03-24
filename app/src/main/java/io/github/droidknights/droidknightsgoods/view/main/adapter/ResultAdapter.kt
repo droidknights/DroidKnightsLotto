@@ -3,8 +3,9 @@ package io.github.droidknights.droidknightsgoods.view.main.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import io.github.droidknights.droidknightsgoods.listener.OnClickListener
+import io.github.droidknights.droidknightsgoods.listener.OnLottoClickListener
 import io.github.droidknights.droidknightsgoods.model.Lotto
+import io.github.droidknights.droidknightsgoods.view.main.adapter.holder.ResultViewHolder
 import io.github.droidknights.droidknightsgoods.view.main.adapter.model.ResultAdapterContract
 
 /**
@@ -15,10 +16,10 @@ class ResultAdapter(val context: Context) : RecyclerView.Adapter<ResultViewHolde
 
     val list = ArrayList<Lotto>()
 
-    private lateinit var onClickListener: OnClickListener
+    private lateinit var onLottoClickListener: OnLottoClickListener
 
     override fun setOnClickListener(onClick: (Int, Boolean) -> Unit) {
-        onClickListener = object : OnClickListener {
+        onLottoClickListener = object : OnLottoClickListener {
             override fun onClickItem(premiumIdx: Int, isHide: Boolean) {
                 onClick(premiumIdx, isHide)
             }
@@ -30,7 +31,7 @@ class ResultAdapter(val context: Context) : RecyclerView.Adapter<ResultViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
-        = ResultViewHolder(context, parent, onClickListener)
+        = ResultViewHolder(context, parent, onLottoClickListener)
 
     override fun getItemCount() = list.size
 
