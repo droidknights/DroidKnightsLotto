@@ -86,7 +86,6 @@ class MainPresenter : AbstractPresenter<MainContract.View>(), MainContract.Prese
     }
 
     override fun changeItems() {
-        premiums = premiums.plus(Premium("", "후드", 1, "개", R.drawable.img_done))
         premiumPagerModel.itemList = premiums
         premiumPagerView.notifyDataSetChanged()
         view?.showLastItem(premiums.size)
