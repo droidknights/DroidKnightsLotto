@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,6 +13,17 @@
         android:layout_height="match_parent"
         android:scaleType="centerInside"
         android:src="@drawable/logo" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/btn_open_source_license"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|left"
+        android:src="@drawable/setting"
+        android:padding="10dp"
+        android:alpha="0.6"
+        app:layout_anchor="@+id/img_logo"
+        app:layout_anchorGravity="top|right" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"

@@ -46,7 +46,7 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClic
                     .setDuration(duration)
                     .setInterpolator(DecelerateInterpolator())
                     .withStartAction {
-                        tv_result_idx.setTextColor(ContextCompat.getColor(context, R.color.textColor))
+                        tv_result_idx.setTextColor(ContextCompat.getColor(context, R.color.textRanHint))
                         tv_result_idx.text = 0.toString()
                     }
                     .setUpdateListener { tv_result_idx.text = ran.nextInt(ConstLimit()).toString() }
