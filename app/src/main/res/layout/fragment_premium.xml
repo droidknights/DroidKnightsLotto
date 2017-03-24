@@ -1,0 +1,70 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_sponsors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="sponsors - " />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:textColor="@color/textColor"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="1개" />
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
+        app:layout_constraintRight_toLeftOf="@+id/tv_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_count"
+        tools:text="name" />
+
+    <ImageView
+        android:id="@+id/img_gifts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/tv_count"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sponsors"
+        tools:src="@drawable/droidknights_text" />
+
+    <ImageView
+        android:id="@+id/img_done_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#BB000000"
+        app:layout_constraintBottom_toTopOf="@+id/tv_count"
+        app:layout_constraintLeft_toLeftOf="@+id/img_gifts"
+        app:layout_constraintRight_toRightOf="@+id/img_gifts"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sponsors"
+        android:padding="50dp"
+        android:src="@drawable/img_done" />
+
+</android.support.constraint.ConstraintLayout>

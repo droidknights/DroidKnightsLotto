@@ -4,30 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.droidknights.droidknightsgoods.MainActivity">
+    android:background="@color/colorPrimary"
+    tools:context="io.github.droidknights.droidknightsgoods.view.main.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/logo" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/btn_open_source_license"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|left"
+        android:src="@drawable/setting"
+        android:padding="10dp"
+        android:alpha="0.6"
+        app:layout_anchor="@+id/img_logo"
+        app:layout_anchorGravity="top|right" />
 
-    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
 
-    <include layout="@layout/content_main" />
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo_text"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/droidknights_text"
+        android:visibility="gone" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Message"
+        android:textColor="@color/white"
+        android:textSize="80sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/content_result_include"
+        layout="@layout/content_result"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>
