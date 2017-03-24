@@ -1,15 +1,19 @@
 package io.github.droidknights.droidknightsgoods.view.main.adapter.holder
 
-import android.animation.Animator
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import io.github.droidknights.droidknightsgoods.R
 import io.github.droidknights.droidknightsgoods.listener.OnLottoClickListener
+import io.github.droidknights.droidknightsgoods.model.ConstLimit
 import io.github.droidknights.droidknightsgoods.model.Lotto
 import kotlinx.android.synthetic.main.item_result_view_holder.view.*
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by tae-hwan on 23/03/2017.
@@ -18,20 +22,13 @@ import kotlinx.android.synthetic.main.item_result_view_holder.view.*
 class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClickListener: OnLottoClickListener) :
         RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_result_view_holder, parent, false)) {
 
-    var animValue = 0
-    var duration = 250L
+    val ran = Random(System.nanoTime())
+    val duration = TimeUnit.SECONDS.toMillis(2)
 
     fun onBindView(position: Int, lotto: Lotto) {
-        animValue = 0
         itemView?.apply {
             if (lotto.isAnimationNumber) {
-                tv_result_idx.text = 0.toString()
-                var interval = lotto.idx / 10
-                if (interval <= 0) {
-                    interval = 1
-                }
-                duration = 20L
-                startAnimation(lotto.idx, interval)
+                startAnimation(lotto.idx)
             } else {
                 tv_result_idx.text = lotto.idx.toString()
             }
@@ -43,40 +40,21 @@ class ResultViewHolder(val context: Context, parent: ViewGroup?, val onLottoClic
         }
     }
 
-    private fun startAnimation(destValue: Int, interval: Int) {
+    private fun startAnimation(destValue: Int) {
         itemView?.apply {
-            if (tv_result_idx.text.toString().toInt() == destValue) {
-                Log.d("TEMP", "animValue $animValue destValue $destValue")
-                tv_result_idx.animate().cancel()
-            } else {
-                tv_result_idx.animate().translationY(0F).setDuration(duration).setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationRepeat(animation: Animator?) {
+            tv_result_idx.animate()
+                    .setDuration(duration)
+                    .setInterpolator(DecelerateInterpolator())
+                    .withStartAction {
+                        tv_result_idx.setTextColor(ContextCompat.getColor(context, R.color.textColor))
+                        tv_result_idx.text = 0.toString()
                     }
-
-                    override fun onAnimationEnd(animation: Animator?) {
-                        animValue += interval
-                        if (animValue > destValue) {
-                            animValue = destValue
-                        }
-                        tv_result_idx.text = animValue.toString()
-                        tv_result_idx.translationY = 0F
-                        if (animValue + interval != destValue) {
-                            duration += 20L
-                            if (duration >= 250) { duration = 250L }
-                            startAnimation(destValue, interval)
-                        } else {
-                            tv_result_idx.text = destValue.toString()
-                            animation?.cancel()
-                        }
+                    .setUpdateListener { tv_result_idx.text = ran.nextInt(ConstLimit()).toString() }
+                    .withEndAction {
+                        tv_result_idx.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+                        tv_result_idx.text = destValue.toString()
                     }
-
-                    override fun onAnimationCancel(animation: Animator?) {
-                    }
-
-                    override fun onAnimationStart(animation: Animator?) {
-                    }
-                }).start()
-            }
+                    .start()
         }
     }
 }
