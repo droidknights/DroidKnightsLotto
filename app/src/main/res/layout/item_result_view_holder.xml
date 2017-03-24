@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_result_idx"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="20dp">
-
-    <CheckedTextView
-        android:id="@+id/tv_result_idx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_centerInParent="true"
-        android:text="005"
-        android:textColor="@color/color_select_item"
-        android:textSize="60sp"
-        android:textStyle="bold" />
-</RelativeLayout>
+    android:layout_centerInParent="true"
+    android:layout_margin="5dp"
+    android:text="005"
+    android:textColor="@color/color_select_item"
+    android:textSize="60sp"
+    android:textStyle="bold" />
